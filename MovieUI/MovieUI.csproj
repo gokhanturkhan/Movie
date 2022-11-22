@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Infrastructure\Movie.Persistence\Movie.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>

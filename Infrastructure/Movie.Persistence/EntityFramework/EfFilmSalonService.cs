@@ -1,4 +1,4 @@
-﻿using Movie.Application.Interfaces.Repository;
+﻿using Movie.Application.Interfaces.Services;
 using Movie.Domain.Entities;
 using Movie.Persistence.Context;
 using System;
@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 
 namespace Movie.Persistence.EntityFramework
 {
-    public class EfFilmService : EfEntityRepositoryBase<Film,MovieDbContext>, IFilmService
+    public class EfFilmSalonService : EfEntityRepositoryBase<FilmSalon,MovieDbContext>, IFilmSalonService
     {
-       
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Movie.Application.Interfaces.Repository;
+using Movie.Application.Interfaces.Services;
 using Movie.Persistence.EntityFramework;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace Movie.Persistence
         {
             services.AddSingleton<IFilmService, EfFilmService>();
             services.AddSingleton<ISalonService, EfSalonService>();
+            services.AddSingleton<IFilmSalonService, EfFilmSalonService>();
         }
     }
 }

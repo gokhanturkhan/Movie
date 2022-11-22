@@ -1,0 +1,21 @@
+﻿@model Movie.Domain.Entities.Film
+
+    <form method="post" enctype="multipart/form-data" asp-controller="Film" asp-action="UpdateFilm">
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <input type="hidden" name="CreatedDate" value="@Model.CreatedDate" />
+        <table>
+            <tr>
+                <td>Film Adı: </td>
+                <td><input type="text" id="Name" name="Name" value="@Model.Name" /></td>
+            </tr>
+            <tr>
+                <td>Yapım Tarihi: </td>
+                <td><input type="date" id="YearOfConstruction" value="@Model.YearOfConstruction.Value.ToString("yyyy-MM-dd")" name="YearOfConstruction" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Güncelle" class="btn btn-success" /></td>
+            </tr>
+        </table>
+        <hr />
+    </form>

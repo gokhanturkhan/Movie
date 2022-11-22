@@ -11,13 +11,14 @@ namespace Movie.Persistence.Context
     public class MovieDbContext : DbContext
     {
        
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB; Database=Movie;Trusted_Connection = true");
         }
         public DbSet<Film> Films { get; set; }
         public DbSet<Salon> Salons { get; set; }
+
+        public DbSet<FilmSalon> FilmSalons { get; set; }
   
 
     }

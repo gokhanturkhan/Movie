@@ -13,28 +13,20 @@ namespace MovieUI.Controllers
     public class HomeController : Controller
     {
         private readonly IFilmService _filmService;
-
-        public HomeController(IFilmService filmService)
+        private readonly ISalonService _salonService;
+        public HomeController(IFilmService filmService, ISalonService salonService)
         {
             _filmService = filmService;
+            _salonService = salonService;
         }
-
 
         public IActionResult Index()
         {
-            var filmler = _filmService.GetAll(a => a.Id== 2);
-            return View(filmler);
+
+            //var filmler = _filmService.GetAll(a => a.Id == 2);
+            var salonlar = _salonService.GetAll();
+            return View(salonlar);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }

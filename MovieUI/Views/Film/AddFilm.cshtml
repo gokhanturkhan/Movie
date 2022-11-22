@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<div>
+    <form method="post" enctype="multipart/form-data" asp-controller="Film" asp-action="AddFilm">
+        <table>
+            <tr>
+                <td>Film Adı: </td>
+                <td><input type="text" id="Name" name="Name" /></td>
+            </tr>
+            <tr>
+                <td>Yapım Tarihi: </td>
+                <td><input type="date" id="YearOfConstruction" name="YearOfConstruction" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Submit" /></td>
+            </tr>
+        </table>
+        <hr />
+    </form>
+</div>

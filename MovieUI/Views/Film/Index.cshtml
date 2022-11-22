@@ -1,0 +1,80 @@
+﻿@model List<Movie.Domain.Entities.Film>
+
+    <form action="@Url.Action("Index","Film")" method="get">
+        <label>Başlangıç Tarih</label>
+        <input type="date" name="baslangic" value="@ViewBag.baslangictarih" />
+        <label>Bitiş Tarih</label>
+        <input type="date" name="bitis" value="@ViewBag.bitistarih" />
+        <button type="submit">Listele</button>
+    </form>
+    <a class="btn btn-primary" href="@Url.Action("Index","Film")">Aramayı Temizle</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Film Adı</th>
+            <th scope="col">Yayınlanma Tarihi</th>
+            <th scope="col">Oluşturulma Tarihi</th>
+            <th scope="col">Güncelle</th>
+            <th scope="col">Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderBy(a => a.YearOfConstruction))
+        {
+            <tr>
+                <th scope="row">@item.Id</th>
+                <td>@item.Name</td>
+                <td>@item.YearOfConstruction</td>
+                <td>@item.CreatedDate</td>
+                <td>
+                    <a href="#" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" onclick="UpdateModal(@item.Id)">Güncelle</a>
+                </td>
+                <td>
+                    <form action="@Url.Action("DeleteFilm", "Film")" method="delete">
+                        <input type="hidden" name="modelid" value="@item.Id" />
+                        <input class="btn btn-danger" type="submit" value="Delete" />
+                    </form>
+                </td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Güncelle</h5>
+                <button type="button" class="closeModal close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+               
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="closeModal btn btn-secondary" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    
+    function UpdateModal(ortakId) {
+        var url = '@Url.Action("UpdateFilmPartial", "Film")';
+        url += '/?Id=' + ortakId;
+
+        $.post(url, function (data) { })
+ 
+            .done(function (data) {
+
+                $("#exampleModal .modal-body").html(data);
+     
+                $("#exampleModal").modal("show");
+            })
+    }
+</script>
