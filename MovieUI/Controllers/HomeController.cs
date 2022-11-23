@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Movie.Application.Interfaces.Repository;
 using MovieUI.Models;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace MovieUI.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly IFilmService _filmService;
@@ -22,10 +24,7 @@ namespace MovieUI.Controllers
 
         public IActionResult Index()
         {
-
-            //var filmler = _filmService.GetAll(a => a.Id == 2);
-            var salonlar = _salonService.GetAll();
-            return View(salonlar);
+            return RedirectToAction("Index", "Film");
         }
 
     }

@@ -26,7 +26,7 @@
                     <li><a class="dropdown-item" href="#!">Settings</a></li>
                     <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                     <li><hr class="dropdown-divider" /></li>
-                    <li><a class="dropdown-item" href="#!">Çıkış Yap</a></li>
+                    <li><a class="dropdown-item" href="@Url.Action("LogOut","Login")">Çıkış Yap</a></li>
                 </ul>
             </li>
         </ul>
@@ -42,13 +42,9 @@
                             Anasayfa
                         </a>
                         <div class="sb-sidenav-menu-heading">*****</div>
-                        <a class="nav-link" href="@Url.Action("Index","Home")">
+                        <a class="nav-link" href="@Url.Action("Index","Salon")">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Salonlar
-                        </a>
-                        <a class="nav-link" href="@Url.Action("Index","Home")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Filimler
                         </a>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>

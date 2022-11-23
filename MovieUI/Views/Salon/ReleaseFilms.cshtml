@@ -1,0 +1,16 @@
+﻿@model ReleaseFilmViewModel
+
+   <div class="container">
+       <div class="row">
+           <h2>@Model.Salon.Name Gösterime Giren Filmler</h2>
+
+           <ul class="list-group">
+               @foreach (var item in Model.FilmSalonDtos)
+               {
+                   <li class="list-group-item">@item.FilmName adlı film @item.ReleaseDate tarihinde gösterime girmiştir.</li>
+
+               }
+           </ul>
+
+       </div>
+   </div>

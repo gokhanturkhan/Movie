@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Movie.Domain.Entities
 {
-    public class Salon : BaseEntity
+    public class User: BaseEntity
     {
-        public string Name { get; set; }
-        public ICollection<FilmSalon> Films { get; set; }
+        public string UserId { get; set; }
+        public string Password { get; set; }
     }
 }

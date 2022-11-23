@@ -2,20 +2,20 @@
     Layout = "_Layout";
 }
 
-<div>
+<div class="container">
     <form method="post" enctype="multipart/form-data" asp-controller="Film" asp-action="AddFilm">
         <table>
             <tr>
                 <td>Film Adı: </td>
-                <td><input type="text" id="Name" name="Name" /></td>
+                <td><input class="form-control" type="text" required id="Name" name="Name" /></td>
             </tr>
             <tr>
                 <td>Yapım Tarihi: </td>
-                <td><input type="date" id="YearOfConstruction" name="YearOfConstruction" /></td>
+                <td><input class="form-control" type="date" required id="YearOfConstruction" name="YearOfConstruction" /></td>
             </tr>
             <tr>
                 <td></td>
-                <td><input type="submit" value="Submit" /></td>
+                <td><input class="btn btn-primary" type="submit" value="Ekle" /></td>
             </tr>
         </table>
         <hr />

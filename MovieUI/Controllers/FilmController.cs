@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Movie.Application.Interfaces.Repository;
+using Movie.Persistence.EntityFramework;
+using MovieUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,24 +10,38 @@ using System.Threading.Tasks;
 
 namespace MovieUI.Controllers
 {
+    [Authorize]
     public class FilmController : Controller
     {
+        public readonly ISalonService _salonService;
         public readonly IFilmService _filmService;
 
-        public FilmController(IFilmService filmService)
+        public FilmController(IFilmService filmService, ISalonService salonService)
         {
             _filmService = filmService;
+            _salonService = salonService;
         }
         public IActionResult Index(DateTime baslangic, DateTime bitis)
         {
+            var model = new FilmsViewModel();
+
+            model.Salons = _salonService.GetAll();
+
             if(baslangic != DateTime.MinValue && bitis != DateTime.MinValue)
             {
-                ViewBag.baslangictarih = baslangic.ToString("yyyy-MM-dd");
-                ViewBag.bitistarih = bitis.ToString("yyyy-MM-dd");
-                return View(_filmService.GetAll(a => a.YearOfConstruction >= baslangic && a.YearOfConstruction <= bitis));
+                model.BaslangicDate = baslangic.ToString("yyyy-MM-dd");
+                model.BitisDate = bitis.ToString("yyyy-MM-dd");
+                //ViewBag.baslangictarih = baslangic.ToString("yyyy-MM-dd");
+                //ViewBag.bitistarih = bitis.ToString("yyyy-MM-dd");
+                model.Films = _filmService.GetAll(a => a.YearOfConstruction >= baslangic && a.YearOfConstruction <= bitis);
+              
             }
-
-            return View(_filmService.GetAll());
+            else
+            {
+                model.Films = _filmService.GetAll();
+            }
+            
+            return View(model);
         }
 
         [HttpGet]
@@ -37,8 +54,17 @@ namespace MovieUI.Controllers
         [HttpPost]
         public IActionResult AddFilm(Movie.Domain.Entities.Film film)
         {
-            film.CreatedDate = DateTime.Now;
             _filmService.Add(film);
+           
+           
+            return RedirectToAction("Index", "Film");
+        }
+
+        [HttpPost]
+        public IActionResult AddFilmRelease(int FilmId,DateTime ReleaseDate, int SalonId)
+        {
+            ((EfFilmService)_filmService).AddFilmToSalon(_filmService.Get(a => a.Id == FilmId), new Movie.Domain.Entities.Salon { Id = SalonId }, ReleaseDate);
+
             return RedirectToAction("Index", "Film");
         }
 
@@ -62,5 +88,13 @@ namespace MovieUI.Controllers
 
             return RedirectToAction("Index", "Film");
         }
+        public IActionResult ReleaseSalons(int FilmId)
+        {
+            var model = new ReleaseSalonViewModel();
+            model.FilmSalonDtos = ((EfFilmService)_filmService).GetSalonsByFilmId(FilmId);
+            model.Film = _filmService.Get(a => a.Id == FilmId);
+            return View(model);
+        }
+        
     }
 }

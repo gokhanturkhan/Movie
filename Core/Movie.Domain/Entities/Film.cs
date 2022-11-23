@@ -12,5 +12,7 @@ namespace Movie.Domain.Entities
     {
         public string Name { get; set; }
         public DateTime? YearOfConstruction { get; set; }
-    }
+
+        public ICollection<FilmSalon> Salons { get; set; }
+}
 }

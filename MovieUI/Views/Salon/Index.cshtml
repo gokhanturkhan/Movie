@@ -1,0 +1,24 @@
+﻿@model List<Movie.Domain.Entities.Salon>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Salon</th>
+            <th scope="col">Gösterime Giren Filmler</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.Name</th>
+                <td><a class="btn btn-primary" href="@Url.Action("ReleaseFilms","Salon", new { SalonId=item.Id })">Gösterime Giren Filmler</a></td>
+                <td></td>
+                <td></td>
+            </tr>
+        }
+
+    </tbody>
+</table>

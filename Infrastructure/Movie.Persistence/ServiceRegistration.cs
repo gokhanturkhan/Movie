@@ -17,6 +17,7 @@ namespace Movie.Persistence
             services.AddSingleton<IFilmService, EfFilmService>();
             services.AddSingleton<ISalonService, EfSalonService>();
             services.AddSingleton<IFilmSalonService, EfFilmSalonService>();
+            services.AddSingleton<IUserService, EfUserService>();
         }
     }
 }

@@ -25,6 +25,10 @@ namespace Movie.Persistence.EntityFramework
 
         public void Delete(TEntity entity)
         {
+
+            Domain.Entities.Film f = new Domain.Entities.Film();
+            Context.MovieDbContext c = new Context.MovieDbContext();
+            c.Films.Add(f);
             using (TContext context = new TContext())
             {
                 var deletedEntity = context.Entry(entity);
